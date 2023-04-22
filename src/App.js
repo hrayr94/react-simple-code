@@ -4,24 +4,36 @@ import Image from "./components/Image";
 import photo1 from "./img/climatechange.jpg";
 
 class App extends React.Component {
-  helpText = "Help text!";
+  constructor(props) {
+    super(props);
+    this.state = {
+      helpText: "Help text",
+      userData: "",
+    };
+    this.inputClick = this.inputClick.bind(this);
+  }
+
+  helpText = "Help text";
   render() {
     return (
       <div className="name">
         <Header title="Head of site" />
-        <h1>{this.helpText}</h1>
+        <h1>{this.state.helpText}</h1>
+        <h2>{this.state.userData}</h2>
         <input
-          placeholder={this.helpText}
+          placeholder={this.state.helpText}
+          onChange={(event) => this.setState({ userData: event.target.value })}
           onClick={this.inputClick}
           onMouseEnter={this.mouseOver}
         />
-        <p>{this.helpText === "Help text" ? "Yes" : "No"}</p>
+        <p>{this.state.helpText === "Help text!" ? "Yes" : "No"}</p>
         <Image image={photo1} />
         <img src={photo1} />
       </div>
     );
   }
   inputClick() {
+    this.setState({ helpText: "Changed" });
     console.log("Clicked");
   }
   mouseOver() {
